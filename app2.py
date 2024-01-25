@@ -17,26 +17,26 @@ def predict_price(model, scaler, observation):
     return prediction[0]
 
 def main():
-    st.title('Car Price Prediction App')
+    st.title('Application de prédiction du prix des voitures par Mohamed Amine Karmous')
 
     # Sidebar with user input
-    st.sidebar.header('Input Features')
+    st.sidebar.header("Fonctionnalités d'entrée")
 
-    model_year = st.sidebar.number_input('Model Year', value=2018)
-    fuel_type = st.sidebar.selectbox('Fuel Type', ['Gasoline', 'Hybrid', 'E85 Flex Fuel', 'Diesel'])
-    transmission = st.sidebar.selectbox('Transmission', ['Automatic', 'Manual'])
-    clean_title = st.sidebar.checkbox('Clean Title')
+    model_year = st.sidebar.number_input('Année modèle', value=2018)
+    fuel_type = st.sidebar.selectbox('Type de carburant', ['Gasoline', 'Hybrid', 'E85 Flex Fuel', 'Diesel'])
+    transmission = st.sidebar.selectbox('Transmission', ['Automatique', 'Manuelle'])
+    clean_title = st.sidebar.checkbox('Titre propre')
 
-    mil = st.sidebar.number_input('Mileage', value=53705)
-    accidents = st.sidebar.checkbox('Accidents Reported')
+    mil = st.sidebar.number_input('Kilométrage', value=53705)
+    accidents = st.sidebar.checkbox('Accidentée')
 
-    horsepower = st.sidebar.number_input('Horsepower', value=241.0)
-    motor_l = st.sidebar.number_input('Engine Displacement (L)', value=2.0)
-    num_cylinders = st.sidebar.number_input('Number of Cylinders', value=4)
+    horsepower = st.sidebar.number_input('Puissance chevaux(ch din)', value=241.0)
+    motor_l = st.sidebar.number_input('Cylindrée du moteur (L)', value=2.0)
+    num_cylinders = st.sidebar.number_input('Nombre de cylindres', value=4)
 
     # Map categorical features to numerical format
     fuel_mapping = {'Gasoline': 1, 'Hybrid': 0, 'E85 Flex Fuel': 2, 'Diesel': -1}
-    transmission_mapping = {'Automatic': 1, 'Manual': 0}
+    transmission_mapping = {'Automatique': 1, 'Manuelle': 0}
 
     fuel_type_numeric = fuel_mapping[fuel_type]
     transmission_numeric = transmission_mapping[transmission]
@@ -55,9 +55,9 @@ def main():
     })
 
     # Predict the price
-    if st.button('Predict Price'):
+    if st.button('prédire le prix'):
         prediction = predict_price(model, scaler, user_input)
-        st.success(f'Predicted Price: ${prediction:,.2f}')
+        st.success(f'Prix prévu: ${prediction:,.2f}')
 
 if __name__ == '__main__':
     main()
